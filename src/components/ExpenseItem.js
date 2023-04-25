@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import { TiDelete } from 'react-icons/ti';
 import { AppContext } from '../context/AppContext';
 import './ExpenseItem.css';
+import Positive from './Positive';
+import Negative from './Negative';
+
 
 const ExpenseItem = (props) => {
   const { dispatch } = useContext(AppContext);
@@ -43,12 +46,12 @@ const ExpenseItem = (props) => {
       <td>£{props.cost}</td>
       <td>
         <button className="increase-button" onClick={() => increaseAllocation(props.name)}>
-          <img src="img/positive.svg" alt="+" />
+        <Positive style={{ width: "20px", height: "20px" }} />
         </button>
       </td>
       <td>
         <button className="decrease-button" onClick={() => decreaseAllocation(props.name)}>
-          <img src="img/negative.svg" alt="-" />
+          <Negative size="1.5em" className="svg-icon" />
         </button>
       </td>
       <td>

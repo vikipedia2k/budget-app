@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Budget = () => {
-  const { expenses, dispatch } = useContext(AppContext);
+  const { expenses } = useContext(AppContext);
   const [budget, setBudget] = useState(() => {
     return localStorage.getItem('budget') || 2000;
   });
@@ -14,10 +14,15 @@ const Budget = () => {
 
   const handleBudgetChange = (e) => {
     const newBudget = e.target.value;
-    setBudget(newBudget);
-    localStorage.setItem('budget', newBudget);
+    if (newBudget < 0) {
+      alert("Budget cannot be negative!");
+      setBudget(0);
+    } else {
+      setBudget(newBudget);
+      localStorage.setItem('budget', newBudget);
+    }
   };
-
+  
   const handleSaveClick = () => {
     const budgetAsNumber = Number(budget);
     const totalExpenses = expenses.reduce((total, item) => {
